@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 public class GameWindow extends JFrame{
@@ -12,6 +14,9 @@ public class GameWindow extends JFrame{
     }
 
     public static void main(String[] args) {
-        new GameWindow();
+        GameWindow gameWindow = new GameWindow();
+        gameWindow.setLayout(new BorderLayout());
+        gameWindow.add(new GamePanel(), BorderLayout.CENTER);
+        gameWindow.pack();
     }
 }
