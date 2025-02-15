@@ -8,6 +8,7 @@ public class GamePanel extends JPanel implements KeyListener{
     public static final int WIDTH = Snake.SEGMENT_SIZE * 40;
     private Snake snake;
     private Food food;
+    private int points = 0;
 
     public GamePanel() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -31,11 +32,14 @@ public class GamePanel extends JPanel implements KeyListener{
         for (int i = 0; i < snake.getSnakeSegments().size(); i++) {
             Point segment = snake.getSnakeSegments().get(i);
             g.fillRect(segment.x, segment.y, Snake.SEGMENT_SIZE, Snake.SEGMENT_SIZE);
-        }
+        } // Paint snake
+        
+        g.drawString("Points: " + points, 10, HEIGHT - 10); // Paint score
+
         g.setColor(Color.RED);
         for (Point foodLocation : food.getFoodLocations()) {
             g.fillRect(foodLocation.x, foodLocation.y, Snake.SEGMENT_SIZE, Snake.SEGMENT_SIZE);
-        }
+        } // Paint food
     }
 
     public Snake getSnake() {
@@ -44,6 +48,10 @@ public class GamePanel extends JPanel implements KeyListener{
 
     public Food getFood() {
         return food;
+    }
+
+    public void incrementPoints() {
+        points++;
     }
 
     @Override

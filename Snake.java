@@ -37,6 +37,6 @@ public class Snake {
             this.direction == Direction.RIGHT && direction == Direction.LEFT) {
         } else {
             this.direction = direction;
-        }
+        } // Only change direction if it is not the opposite direction
     }
 }

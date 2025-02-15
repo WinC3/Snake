@@ -42,7 +42,6 @@ public class GameWindow extends JFrame implements ActionListener{
 
         while (true) {
             head = snake.getSnakeSegments().get(0);
-            System.out.println("Snake at: " + head);
             if (head.x < 0) {
                 head.x = GamePanel.WIDTH - Snake.SEGMENT_SIZE;
             } else if (head.x >= GamePanel.WIDTH) {
@@ -51,33 +50,32 @@ public class GameWindow extends JFrame implements ActionListener{
                 head.y = GamePanel.HEIGHT - Snake.SEGMENT_SIZE;
             } else if (head.y >= GamePanel.HEIGHT) {
                 head.y = 0;
-            }
+            } // Wrapping snake around edges
+
             snakeSegments = new ArrayList<>(snake.getSnakeSegments());
             foodLocations = new ArrayList<>(food.getFoodLocations());;
             Iterator<Point> iterator = foodLocations.iterator();
             while (iterator.hasNext()) {
                 Point foodPoint = iterator.next();
-                System.out.println("Food at: " + foodPoint);
-                System.out.println("Snake at: " + snakeSegments.get(0));
-
                 if (snakeSegments.get(0).equals(foodPoint)) {
                     snake.grow();
+                    gameWindow.gamePanel.incrementPoints();
                     gameWindow.checkCollision = false;
                     iterator.remove();
                     food.removeFood(foodPoint);
                 }
-            }
+            } // Eating and growing
 
             if (!gameWindow.checkCollision) {
                 continue;
-            }
+            }  // Skip collision check if food was eaten
             
             for (int i = 3; i < snakeSegments.size(); i++) {
                 if (snakeSegments.get(0).equals(snakeSegments.get(i))) {
                     System.out.println("Game Over");
                     System.exit(0);
                 }
-            }
+            } // Collision check
         }
     }
 
@@ -93,5 +91,5 @@ public class GameWindow extends JFrame implements ActionListener{
         }
         repaint();
         checkCollision = true;
-    }
+    } // Timer action
 }
