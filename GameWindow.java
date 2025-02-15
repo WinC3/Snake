@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ public class GameWindow extends JFrame implements ActionListener{
     private Timer timer;
     private GamePanel gamePanel;
     private int spawnIntervalCounter = 0;
+    private boolean checkCollision = true;
 
     public GameWindow() {
         setTitle("Game Window");
@@ -36,13 +38,32 @@ public class GameWindow extends JFrame implements ActionListener{
         Food food = gameWindow.gamePanel.getFood();
         ArrayList<Point> snakeSegments;
         ArrayList<Point> foodLocations;
+
         while (true) {
-            snakeSegments = (ArrayList<Point>) snake.getSnakeSegments();
-            foodLocations = (ArrayList<Point>) food.getFoodLocations();
-            for (Point foodPoint : foodLocations) {
+            System.out.println("Snake at: " + snake.getSnakeSegments().get(0));
+            snakeSegments = new ArrayList<>(snake.getSnakeSegments());
+            foodLocations = new ArrayList<>(food.getFoodLocations());;
+            Iterator<Point> iterator = foodLocations.iterator();
+            while (iterator.hasNext()) {
+                Point foodPoint = iterator.next();
+                System.out.println("Food at: " + foodPoint);
+                System.out.println("Snake at: " + snakeSegments.get(0));
+
                 if (snakeSegments.get(0).equals(foodPoint)) {
                     snake.grow();
+                    gameWindow.checkCollision = false;
+                    iterator.remove();
                     food.removeFood(foodPoint);
+                }
+            }
+
+            if (!gameWindow.checkCollision) {
+                continue;
+            }
+            for (int i = 1; i < snakeSegments.size(); i++) {
+                if (snakeSegments.get(0).equals(snakeSegments.get(i))) {
+                    System.out.println("Game Over");
+                    System.exit(0);
                 }
             }
         }
@@ -59,5 +80,6 @@ public class GameWindow extends JFrame implements ActionListener{
             spawnIntervalCounter %= Food.SPAWN_INTERVAL;
         }
         repaint();
+        checkCollision = true;
     }
 }
