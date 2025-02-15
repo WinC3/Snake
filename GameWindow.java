@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.Point;
@@ -39,8 +38,20 @@ public class GameWindow extends JFrame implements ActionListener{
         ArrayList<Point> snakeSegments;
         ArrayList<Point> foodLocations;
 
+        Point head;
+
         while (true) {
-            System.out.println("Snake at: " + snake.getSnakeSegments().get(0));
+            head = snake.getSnakeSegments().get(0);
+            System.out.println("Snake at: " + head);
+            if (head.x < 0) {
+                head.x = GamePanel.WIDTH - Snake.SEGMENT_SIZE;
+            } else if (head.x >= GamePanel.WIDTH) {
+                head.x = 0;
+            } else if (head.y < 0) {
+                head.y = GamePanel.HEIGHT - Snake.SEGMENT_SIZE;
+            } else if (head.y >= GamePanel.HEIGHT) {
+                head.y = 0;
+            }
             snakeSegments = new ArrayList<>(snake.getSnakeSegments());
             foodLocations = new ArrayList<>(food.getFoodLocations());;
             Iterator<Point> iterator = foodLocations.iterator();
@@ -60,7 +71,8 @@ public class GameWindow extends JFrame implements ActionListener{
             if (!gameWindow.checkCollision) {
                 continue;
             }
-            for (int i = 1; i < snakeSegments.size(); i++) {
+            
+            for (int i = 3; i < snakeSegments.size(); i++) {
                 if (snakeSegments.get(0).equals(snakeSegments.get(i))) {
                     System.out.println("Game Over");
                     System.exit(0);

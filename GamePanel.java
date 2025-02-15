@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements KeyListener{
-    public static final int HEIGHT = 600;
-    public static final int WIDTH = 800;
+    public static final int HEIGHT = Snake.SEGMENT_SIZE * 30;
+    public static final int WIDTH = Snake.SEGMENT_SIZE * 40;
     private Snake snake;
     private Food food;
 
