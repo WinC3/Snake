@@ -1,4 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.List;
+import java.util.ArrayList;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -27,12 +30,26 @@ public class GameWindow extends JFrame implements ActionListener{
     }
 
     public static void main(String[] args) {
-        new GameWindow();
+        GameWindow gameWindow = new GameWindow();
+
+        Snake snake = gameWindow.gamePanel.getSnake();
+        Food food = gameWindow.gamePanel.getFood();
+        ArrayList<Point> snakeSegments;
+        ArrayList<Point> foodLocations;
+        while (true) {
+            snakeSegments = (ArrayList<Point>) snake.getSnakeSegments();
+            foodLocations = (ArrayList<Point>) food.getFoodLocations();
+            for (Point foodPoint : foodLocations) {
+                if (snakeSegments.get(0).equals(foodPoint)) {
+                    snake.grow();
+                    food.removeFood(foodPoint);
+                }
+            }
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Timer event");
         gamePanel.getSnake().move();
         spawnIntervalCounter += TIMER_DELAY;
         if (spawnIntervalCounter >= Food.SPAWN_INTERVAL) {
