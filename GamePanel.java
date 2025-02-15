@@ -16,6 +16,13 @@ public class GamePanel extends JPanel implements KeyListener{
         addKeyListener(this);
         snake = new Snake();
         food = new Food();
+        requestFocusInWindow(); // Request focus in the constructor
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        requestFocusInWindow(); // Request focus when the component is added to its parent
     }
     
     protected void paintComponent(Graphics g) {
