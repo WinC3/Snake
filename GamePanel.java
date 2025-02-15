@@ -63,16 +63,16 @@ public class GamePanel extends JPanel implements KeyListener{
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                snake.setDirection(Direction.UP);
+                snake.queueDirection(Direction.UP);
                 break;
             case KeyEvent.VK_DOWN:
-                snake.setDirection(Direction.DOWN);
+                snake.queueDirection(Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                snake.setDirection(Direction.LEFT);
+                snake.queueDirection(Direction.LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                snake.setDirection(Direction.RIGHT);
+                snake.queueDirection(Direction.RIGHT);
                 break;
             default:
                 break;

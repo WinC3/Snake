@@ -19,7 +19,7 @@ public class GameWindow extends JFrame implements ActionListener{
         setSize(GamePanel.WIDTH, GamePanel.HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setResizable(true);
+        setResizable(false);
         setLocationRelativeTo(null);
 
         gamePanel = new GamePanel();
@@ -71,7 +71,8 @@ public class GameWindow extends JFrame implements ActionListener{
             }  // Skip collision check if food was eaten
             
             for (int i = 3; i < snakeSegments.size(); i++) {
-                if (snakeSegments.get(0).equals(snakeSegments.get(i))) {
+                Point seg = (i >= 0 && i < snakeSegments.size()) ? snakeSegments.get(i) : null;
+                if (snakeSegments.get(0).equals(seg)) {
                     System.out.println("Game Over");
                     System.exit(0);
                 }
@@ -81,6 +82,7 @@ public class GameWindow extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        gamePanel.getSnake().setDirection(); // Only change direction once per timer tick
         gamePanel.getSnake().move();
         spawnIntervalCounter += TIMER_DELAY;
         if (spawnIntervalCounter >= Food.SPAWN_INTERVAL) {

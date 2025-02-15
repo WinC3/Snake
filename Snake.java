@@ -7,6 +7,7 @@ public class Snake {
 
     private List<Point> snakeSegments;
     private Direction direction;
+    private Direction queuedDirection = Direction.RIGHT;
 
     public Snake() {
         direction = Direction.RIGHT;
@@ -30,13 +31,17 @@ public class Snake {
         return snakeSegments;
     }
 
-    public void setDirection(Direction direction) {
+    public void setDirection() {
+        this.direction = queuedDirection;
+    }
+
+    public void queueDirection(Direction direction) {
         if (this.direction == Direction.UP && direction == Direction.DOWN ||
             this.direction == Direction.DOWN && direction == Direction.UP ||
             this.direction == Direction.LEFT && direction == Direction.RIGHT ||
             this.direction == Direction.RIGHT && direction == Direction.LEFT) {
         } else {
-            this.direction = direction;
+            this.queuedDirection = direction;
         } // Only change direction if it is not the opposite direction
     }
 }
