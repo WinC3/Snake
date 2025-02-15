@@ -3,6 +3,8 @@ import java.util.List;
 import java.awt.Point;
 
 public class Snake {
+    public static final int SEGMENT_SIZE = 20;
+
     private List<Point> snakeSegments;
     private Direction direction;
 
@@ -14,7 +16,7 @@ public class Snake {
     
     public void move() {
         Point head = snakeSegments.get(0);
-        Point newHead = new Point(head.x + direction.x, head.y + direction.y);
+        Point newHead = new Point(head.x + direction.x * SEGMENT_SIZE, head.y + direction.y * SEGMENT_SIZE);
         snakeSegments.add(0, newHead);
         snakeSegments.remove(snakeSegments.size() - 1);
     }
