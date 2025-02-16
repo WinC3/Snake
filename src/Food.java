@@ -13,10 +13,12 @@ public class Food {
     }
 
     public void createFood() {
-        Point foodLocation = new Point((int) ((Snake.SEGMENT_SIZE) * (int) (Math.random() * ((int) (GamePanel.WIDTH / Snake.SEGMENT_SIZE + 1)))),
-        (int) ((Snake.SEGMENT_SIZE) * (int) (Math.random() * ((int) (GamePanel.HEIGHT / Snake.SEGMENT_SIZE + 1)))));
+        Point foodLocation = new Point(
+                (int) ((Snake.SEGMENT_SIZE)
+                        * (int) (Math.random() * ((int) (GamePanel.WIDTH / Snake.SEGMENT_SIZE + 1)))),
+                (int) ((Snake.SEGMENT_SIZE)
+                        * (int) (Math.random() * ((int) (GamePanel.HEIGHT / Snake.SEGMENT_SIZE + 1)))));
         foodLocations.add(foodLocation);
-        System.out.println("Food created at: " + foodLocation);
     }
 
     public void removeFood(Point foodLocation) {

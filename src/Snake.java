@@ -14,7 +14,7 @@ public class Snake {
         snakeSegments = new ArrayList<>();
         snakeSegments.add(new Point(GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2));
     }
-    
+
     public void move() {
         Point head = snakeSegments.get(0);
         Point newHead = new Point(head.x + direction.x * SEGMENT_SIZE, head.y + direction.y * SEGMENT_SIZE);
@@ -37,9 +37,9 @@ public class Snake {
 
     public void queueDirection(Direction direction) {
         if (this.direction == Direction.UP && direction == Direction.DOWN ||
-            this.direction == Direction.DOWN && direction == Direction.UP ||
-            this.direction == Direction.LEFT && direction == Direction.RIGHT ||
-            this.direction == Direction.RIGHT && direction == Direction.LEFT) {
+                this.direction == Direction.DOWN && direction == Direction.UP ||
+                this.direction == Direction.LEFT && direction == Direction.RIGHT ||
+                this.direction == Direction.RIGHT && direction == Direction.LEFT) {
         } else {
             this.queuedDirection = direction;
         } // Only change direction if it is not the opposite direction

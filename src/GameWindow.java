@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class GameWindow extends JFrame implements ActionListener{
+public class GameWindow extends JFrame implements ActionListener {
     private static final int TIMER_DELAY = 100;
 
     private Timer timer;
@@ -53,7 +53,8 @@ public class GameWindow extends JFrame implements ActionListener{
             } // Wrapping snake around edges
 
             snakeSegments = new ArrayList<>(snake.getSnakeSegments());
-            foodLocations = new ArrayList<>(food.getFoodLocations());;
+            foodLocations = new ArrayList<>(food.getFoodLocations());
+            ;
             Iterator<Point> iterator = foodLocations.iterator();
             while (iterator.hasNext()) {
                 Point foodPoint = iterator.next();
@@ -68,8 +69,8 @@ public class GameWindow extends JFrame implements ActionListener{
 
             if (!gameWindow.checkCollision) {
                 continue;
-            }  // Skip collision check if food was eaten
-            
+            } // Skip collision check if food was eaten
+
             for (int i = 3; i < snakeSegments.size(); i++) {
                 Point seg = (i >= 0 && i < snakeSegments.size()) ? snakeSegments.get(i) : null;
                 if (snakeSegments.get(0).equals(seg)) {

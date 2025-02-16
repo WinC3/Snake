@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements KeyListener{
+public class GamePanel extends JPanel implements KeyListener {
     public static final int HEIGHT = Snake.SEGMENT_SIZE * 30;
     public static final int WIDTH = Snake.SEGMENT_SIZE * 40;
     private Snake snake;
@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements KeyListener{
         super.addNotify();
         requestFocusInWindow(); // Request focus when the component is added to its parent
     }
-    
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements KeyListener{
             Point segment = snake.getSnakeSegments().get(i);
             g.fillRect(segment.x, segment.y, Snake.SEGMENT_SIZE, Snake.SEGMENT_SIZE);
         } // Paint snake
-        
+
         g.drawString("Points: " + points, 10, HEIGHT - 10); // Paint score
 
         g.setColor(Color.RED);
